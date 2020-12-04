@@ -4,7 +4,7 @@ from PIL import Image
 from api import detect_faces, detect_labels, get_img_metadata, add_face_to_collection,remove_face_from_collection
 import random
 
-UPLOAD_FOLDER = 'static/uploads/'
+UPLOAD_FOLDER = './static/uploads/'
 
 def base():
 	return render_template("base.html")
