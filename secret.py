@@ -1,2 +1,2 @@
-access_key_id  = "AKIA2D4WE3B5XFXZPANX"
-secret_access_key = "LBlnCfH6nLKdjXNfqBiFhfiwVdiEA6d6pZbSq+T7"
+access_key_id  = "YOUR SECRET KEY ID"
+secret_access_key = "YOUR SECRET ACCESS KEY"
