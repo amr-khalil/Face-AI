@@ -1,0 +1,6 @@
+flask
+gunicorn
+pillow
+boto3
+exifread
+geopy

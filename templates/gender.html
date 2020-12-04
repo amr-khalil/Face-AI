@@ -1,0 +1,150 @@
+{% extends 'base.html' %}
+
+{% block bodyblock %}
+    
+    <br><br>
+	<div class="container">
+		<h3 class="content">Gender Classification</h3>
+	<div>
+		<br>
+		<form action="" method="POST" enctype="multipart/form-data">
+		<label for="upload">Upload to predict</label>
+		<input type="file" id= "upload" name="image" required="true" accept="image/*">
+		<input type="submit" value="upload & predict">
+	</form>
+	</div>
+    
+
+	{% if fileupload %}
+	    <div class="container">
+			<div class="row  py-5">
+				<div class="col-md-6 border" style=" text-align: center; direction: block">
+					<img src="{{url_for('static', filename='uploads/')}}{{ img_name }}" class="img-thumbnail" width="{{ w }}" height="300" alt="">			
+				</div>
+
+				<div class="col-md-6 border" style=" text-align: center; direction: block">
+					<img src="{{url_for('static', filename='predict/')}}{{ img_name }}?{{ random }}" class="img-thumbnail" width="{{ w }}" height="300" alt="">					
+			    </div>    	
+	    </div>
+
+	 </div>
+	 <div>
+	 	{% for i, k in values.items() %}
+	 		<div class="card mb-4">
+			  <div class="row">
+			    <div class="col-md-3" >
+			      <img src="{{url_for('static', filename='predict/faces/')}}{{ i }}.jpg?{{ random }}" class="card-img" alt="" style="padding:30px;">
+			    </div>
+			    <div class="col-md-8">
+			      <div class="card-body">
+			        <h3 class="card-title">Face #{{ i }}</h3>
+			        <div class="card-text">
+			        
+               <div class="row">	
+                <div class="col-3 p-0 pl-3"> <strong>Age Range</strong>: </div>
+                <div class="col-9 m-0 p-0 py-1">{{k[0][0]}} - {{k[0][1]}} years</div>            
+              </div>
+
+              <div class="row"> 
+                <div class="col-3 p-0 pl-3"> <strong>Gender</strong>:    {{k[1][0]}}</div>
+                <div class="col-9 m-0 p-0 py-1"> 
+                    <div class="progress">
+                    <div class="progress-bar" role="progressbar" style="width: {{k[1][1]}}%;" aria-valuenow="{{k[1][1]}}" aria-valuemin="0" aria-valuemax="100">{{k[1][1]}}%</div>
+                   </div>
+                </div>
+              </div>
+
+              <div class="row"> 
+                <div class="col-3 p-0 pl-3"> <strong>Emotion</strong>:    {{k[2][0]}}</div>
+                <div class="col-9 m-0 p-0 py-1"> 
+                    <div class="progress">
+                    <div class="progress-bar" role="progressbar" style="width: {{k[2][1]}}%;" aria-valuenow="{{k[2][1]}}" aria-valuemin="0" aria-valuemax="100">{{k[2][1]}}%</div>
+                   </div>
+                </div>
+              </div>
+
+              <div class="row"> 
+                <div class="col-3 p-0 pl-3" > <strong>Beard</strong>:    {{k[3][0]}}</div>
+                <div class="col-9 m-0 p-0 py-1"> 
+                    <div class="progress">
+                    <div class="progress-bar" role="progressbar" style="width: {{k[3][1]}}%;" aria-valuenow="{{k[3][1]}}" aria-valuemin="0" aria-valuemax="100">{{k[3][1]}}%</div>
+                   </div>
+                </div>
+              </div>
+
+              <div class="row"> 
+                <div class="col-3 p-0 pl-3"> <strong>Mustache</strong>:    {{k[4][0]}}</div>
+                <div class="col-9 m-0 p-0 py-1"> 
+                    <div class="progress">
+                    <div class="progress-bar" role="progressbar" style="width: {{k[4][1]}}%;" aria-valuenow="{{k[4][1]}}" aria-valuemin="0" aria-valuemax="100">{{k[4][1]}}%</div>
+                   </div>
+                </div>
+              </div>
+
+              <div class="row"> 
+                <div class="col-3 p-0 pl-3"> <strong>Eyeglasses</strong>:    {{k[5][0]}}</div>
+                <div class="col-9 m-0 p-0 py-1"> 
+                    <div class="progress">
+                    <div class="progress-bar" role="progressbar" style="width: {{k[5][1]}}%;" aria-valuenow="{{k[5][1]}}" aria-valuemin="0" aria-valuemax="100">{{k[5][1]}}%</div>
+                   </div>
+                </div>
+              </div>
+
+              <div class="row"> 
+                <div class="col-3 p-0 pl-3"> <strong>Sunglasses</strong>: {{k[6][0]}}</div>
+                <div class="col-9 m-0 p-0 py-1"> 
+                    <div class="progress">
+                    <div class="progress-bar" role="progressbar" style="width: {{k[6][1]}}%;" aria-valuenow="{{k[6][1]}}" aria-valuemin="0" aria-valuemax="100">{{k[6][1]}}%</div>
+                   </div>
+                </div>
+              </div>
+
+              <div class="row"> 
+                <div class="col-3 p-0 pl-3"> <strong>Eyes Open</strong>: {{k[7][0]}}</div>
+                <div class="col-9 m-0 p-0 py-1"> 
+                    <div class="progress">
+                    <div class="progress-bar" role="progressbar" style="width: {{k[7][1]}}%;" aria-valuenow="{{k[7][1]}}" aria-valuemin="0" aria-valuemax="100">{{k[7][1]}}%</div>
+                   </div>
+                </div>
+              </div>
+
+              <div class="row"> 
+                <div class="col-3 p-0 pl-3"> <strong>Mouth Open</strong>: {{k[8][0]}}</div>
+                <div class="col-9 m-0 p-0 py-1"> 
+                    <div class="progress">
+                    <div class="progress-bar" role="progressbar" style="width: {{k[8][1]}}%;" aria-valuenow="{{k[8][1]}}" aria-valuemin="0" aria-valuemax="100">{{k[8][1]}}%</div>
+                   </div>
+                </div>
+              </div>
+
+              <div class="row"> 
+                <div class="col-3 p-0 pl-3"> <strong>Smile</strong>: {{k[9][0]}}</div>
+                <div class="col-9 m-0 p-0 py-1"> 
+                    <div class="progress">
+                    <div class="progress-bar" role="progressbar" style="width: {{k[9][1]}}%;" aria-valuenow="{{k[9][1]}}" aria-valuemin="0" aria-valuemax="100">{{k[9][1]}}%</div>
+                   </div>
+                </div>
+              </div>
+
+            
+			        </div>
+			        
+			      </div>
+			    </div>
+			  </div>
+			</div>
+	 	{% endfor %}
+	 	
+
+	 </div>
+	{% endif %}
+
+
+
+
+{% endblock %}
+
+
+<div class="progress">
+  <div class="progress-bar" role="progressbar" style="width: 75%;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">75%</div>
+</div>

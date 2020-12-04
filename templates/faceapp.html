@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block bodyblock %}
+	<div class="container">	
+		<br><br>
+		<h3 class="content"> <span>Face Recognition</span> Application</h3>
+        
+        <br><br>
+		<p class="content">
+		 	For this project, you will build a a system for face recognition and gender classification, and test it on a large(-ish) dataset of faces, getting practice with data-science-flavour projects along the way.
+
+		</p>
+		<div style="text-align: center;">
+			<img style="width: 50%" src="https://www.securityindustry.org/wp-content/uploads/2020/02/ai-facial-recognition-887x488.jpg" alt="">
+		</div>
+			
+		<br>
+
+		<div  align="center">
+			<a style=" width: 50%" class="btn btn-outline-danger" href="{{ url_for('face_recognition') }}" >START APP</a>
+		</div>
+		
+	</div>
+
+{% endblock %}
