@@ -1,6 +1,5 @@
 import boto3
 from PIL import Image, ImageDraw, ExifTags, ImageColor, ImageFont, ImageEnhance
-import matplotlib.pyplot as plt
 import json
 import boto3
 import exifread
