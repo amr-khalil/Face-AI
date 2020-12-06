@@ -72,13 +72,18 @@ def recognize_known_faces():
 # Recognize known-faces matches with my collection
 def recognize_celebrities(path):
     values = {}
-    with open(path, 'rb') as image:
-        response = client.recognize_celebrities(Image={'Bytes': image.read()})
-    for celebrity in response['CelebrityFaces']:        
-        for url in celebrity['Urls']:
-            values[celebrity['Name']] = url
-    # Output: [('Steve Jobs', 'www.imdb.com/name/nm0423418')]
+    try:
+        with open(path, 'rb') as image:
+            response = client.recognize_celebrities(Image={'Bytes': image.read()})
+        for celebrity in response['CelebrityFaces']: 
+            name = celebrity['Name']
+            for url in celebrity['Urls']:
+                values[celebrity['Name']] = url
+    except:
+        pass
     return list(values.items())
+
+
 
 def detect_faces(path, filename):
 
@@ -94,6 +99,11 @@ def detect_faces(path, filename):
 
     imgWidth, imgHeight = image.size  
     draw = ImageDraw.Draw(image)
+
+    # font = ImageFont.truetype(<font-file>, <font-size>)
+    text_size= int((imgHeight/imgWidth)*20)   
+    font = ImageFont.truetype("fonts/arial.ttf", text_size)
+    Count = "Count of Faces: 0"
 
     # Calculate and display bounding boxes for each detected face
     values = dict()       
@@ -129,8 +139,8 @@ def detect_faces(path, filename):
         face_path = "./static/predict/faces/{}.jpg".format(face_num+1)
         cropped_img.save(face_path, quality=100, subsampling=0)
 
-        ###### search in my collection ######
-      
+        
+        # recognize known faces
         is_known = search_in_collection(face_path)
             
         ##### Pull facecs ######
@@ -154,24 +164,26 @@ def detect_faces(path, filename):
     
         # Write Text 
         draw = ImageDraw.Draw(image)
-        # font = ImageFont.truetype(<font-file>, <font-size>)
-        text_size= int((imgHeight/imgWidth)*20)
         
-        font = ImageFont.truetype("fonts/arial.ttf", text_size)
-        
+        # Text above box
+        text = "Id {}".format(face_num+1)
+        w, h = font.getsize(text)
+        x, y = (left, top-h)
+        draw.rectangle((x-2, y, x + w, y + h), fill=color)
+        draw.text((x, y), text, fill= '#fff', font=font)
 
         # Text under box
-        text = "{}, {} years".format(Gender, Age_avg)
+        text = "{}".format(is_known)
         w, h = font.getsize(text)
         x, y = (left, top+height)
-        draw.rectangle((x, y, x + w, y + h), fill=color)
+        draw.rectangle((x-2, y-2, x + w, y + h+3), fill=color)
         draw.text((x, y), text, fill= '#fff', font=font)
 
 
         text = "{}".format(Emotion.capitalize())
         w, h = font.getsize(text)
         x, y = (left, top+height+(h))
-        draw.rectangle((x, y, x + w+3, y + h+3), fill=color)
+        draw.rectangle((x-2, y, x + w, y + h), fill=color)
         draw.text((x, y), text, fill= '#fff', font=font)
         #######
         values[face_num+1] =[(AgeRange, AgeRange_c), (Gender, int(Gender_c)),
@@ -260,11 +272,12 @@ def get_img_metadata(path):
     return values.items()
 
 
-def add_face_to_collection(path, fname, lname):
+def add_face_to_collection(path, fname, lname, group):
     
     fname = fname.capitalize()
     lname = lname.capitalize()
-    image_id = "{}_{}".format(fname, lname)
+    group = group.capitalize()
+    image_id = "{}_{}_{}".format(fname, lname, group)
     collectionId='MyCollection'
    
     with open(path, 'rb') as source_image:
@@ -278,7 +291,7 @@ def add_face_to_collection(path, fname, lname):
                                 DetectionAttributes=['ALL'])
 
 
-def remove_face_from_collection(fname, lname):
+def remove_face_from_collection(img_id):
     value = False
     def list_faces_in_collection():
         values = {}
@@ -293,9 +306,8 @@ def remove_face_from_collection(fname, lname):
     face_id_list=[]
     
     collectionId = 'MyCollection'
-    fname = fname.capitalize()
-    lname = lname.capitalize()
-    name = "{}_{}".format(fname, lname)
+    
+    name = img_id
     
     face_dict = list_faces_in_collection()
     if name in face_dict.keys():
@@ -311,7 +323,36 @@ def remove_face_from_collection(fname, lname):
             
     return value
 
+def show_known_people():
+    values = {}
+    folder_path = './static/known_people'
 
+    for img_path in os.listdir(folder_path):
+        if img_path.endswith('.jpg'):
+            img_id = img_path.split('.')
+            img_id = img_id[0]
+            img_id = img_id.split("_")
+            name = "{} {}".format(img_id[0], img_id[1])
+            group = img_id[2]
+            values[img_path] = (name, group)
+    return list(values.items())
+
+
+def is_one_face(path):
+    one_face = False
+    # Load image
+    image=Image.open(path)
+
+    # Convert image to binary
+    with open(path, 'rb') as source_image:
+        source_bytes = source_image.read()
+
+    #Call DetectFaces 
+    response = client.detect_faces( Image={ 'Bytes': source_bytes},Attributes=['ALL'])
+    count = len(response['FaceDetails'])
+    if count == 1:
+        one_face = True
+    return one_face
 
 
 
