@@ -22,27 +22,27 @@
 <!-- Navbar -->
 
 
-	<nav style="height: 100px; " class="navbar navbar-expand-lg navbar-light bg-light">
-	  <a style="font-size: 2.2em; color: gray" class="navbar-brand" href="{{ url_for('index') }}">Face AI</a>
-	  <img style="width: 15vh;" src="https://i.pinimg.com/originals/ba/9a/b4/ba9ab42593e487b4e349973e1d43b11d.gif" alt="">
-	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-	    <span class="navbar-toggler-icon"></span>
-	  </button>
-	  <div  style="font-size: 1.2em; background-color: #f7f7f7 " class="collapse navbar-collapse" id="navbarNav">
-	    <ul class="navbar-nav">
-	      <li class="nav-item">
-	        <a class="nav-link" href="{{ url_for('index') }}">Home <span class="sr-only">(current)</span></a>
-	      </li>
-	      <li class="nav-item">
-	        <a class="nav-link" href="{{ url_for('faceapp') }}">Face App</a>
-	      </li>
+  <nav style="height: 100px; " class="navbar navbar-expand-lg navbar-light bg-light">
+    <a style="font-size: 2.2em; color: gray" class="navbar-brand" href="{{ url_for('index') }}">Face AI</a>
+    <img style="width: 15vh;" src="https://i.pinimg.com/originals/ba/9a/b4/ba9ab42593e487b4e349973e1d43b11d.gif" alt="">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div  style="font-size: 1.2em; background-color: #f7f7f7 " class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link" href="{{ url_for('add_face') }}">Face +/- </a>
+          <a class="nav-link" href="{{ url_for('index') }}">Home <span class="sr-only">(current)</span></a>
         </li>
-	    </ul>
-	  </div>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('faceapp') }}">Face App</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('management') }}">Management</a>
+        </li>
+      </ul>
+    </div>
 
-	   <div class="collapse navbar-collapse" id="navbarTogglerDemo02" style="background-color: #f7f7f7 ">
+     <div class="collapse navbar-collapse" id="navbarTogglerDemo02" style="background-color: #f7f7f7 ">
       <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
         <li class="nav-item">
           <a class="nav-link" href="https://www.linkedin.com/in/amrk/">linkedin</a>
@@ -52,7 +52,7 @@
         </li>
       </ul>
     </div>
-	</nav>   
+  </nav>   
 </div>
 <!-- End Navbar --> 
 <div class="container">
