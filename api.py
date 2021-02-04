@@ -18,7 +18,7 @@ client = boto3.client('rekognition', region_name='eu-central-1',
 
 try:
     response=client.create_collection(CollectionId='MyCollection')
-else:
+except:
     pass
 
 # Search Faces in my collection
