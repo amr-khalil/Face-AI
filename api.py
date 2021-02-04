@@ -8,8 +8,8 @@ from datetime import datetime
 import os
 
 # AWS Cerditinal
-access_key_id = os.environ['access_key_id'] or 'test'
-secret_access_key = os.environ['secret_access_key'] or 'test'
+access_key_id = os.environ['access_key_id'] 
+secret_access_key = os.environ['secret_access_key']
 
 # Client
 client = boto3.client('rekognition', region_name='eu-central-1',
