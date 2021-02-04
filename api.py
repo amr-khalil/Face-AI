@@ -16,6 +16,10 @@ client = boto3.client('rekognition', region_name='eu-central-1',
                       aws_access_key_id = access_key_id,
                       aws_secret_access_key = secret_access_key)
 
+try:
+    response=client.create_collection(CollectionId='MyCollection')
+else:
+    pass
 
 # Search Faces in my collection
 # Give Photo path for the function to compare it with my collection
