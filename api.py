@@ -5,10 +5,11 @@ import boto3
 import exifread
 from geopy.geocoders import Nominatim
 from datetime import datetime
-
-# Cerditinal
-from secret import access_key_id, secret_access_key
 import os
+
+# AWS Cerditinal
+access_key_id = os.environ['access_key_id']
+secret_access_key = os.environ['secret_access_key']
 
 # Client
 client = boto3.client('rekognition', region_name='eu-central-1',
